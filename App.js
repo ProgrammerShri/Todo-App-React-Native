@@ -1,13 +1,13 @@
-// import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
-  Keyboard,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
+  View,
   TextInput,
   TouchableOpacity,
-  View,
+  Keyboard,
+  ScrollView,
 } from "react-native";
 import Task from "./components/Task";
 
@@ -17,7 +17,7 @@ export default function App() {
 
   const handleAddTask = () => {
     Keyboard.dismiss();
-    setTaskItems([...taskItems.task]);
+    setTaskItems([...taskItems, task]);
     setTask(null);
   };
 
@@ -29,28 +29,41 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* Today's Task  */}
-      <View style={styles.taskWrapper}>
-        <Text style={styles.sectionTitle}> Today's Task </Text>
-
-        <View style={styles.items}>
-          {taskItems.map((item, index) => {
-            return (
-              <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-                <Task text={item} />
-              </TouchableOpacity>
-            );
-          })}
+      {/* Added this scroll view to enable scrolling when list gets longer than the page */}
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+        }}
+        keyboardShouldPersistTaps="handled"
+      >
+        {/* Today's Tasks */}
+        <View style={styles.tasksWrapper}>
+          <Text style={styles.sectionTitle}>Today's tasks</Text>
+          <View style={styles.items}>
+            {/* This is where the tasks will go! */}
+            {taskItems.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => completeTask(index)}
+                > 
+                  <Task text={item} />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
         </View>
-      </View>
+      </ScrollView>
 
+      {/* Write a task */}
+      {/* Uses a keyboard avoiding view which ensures the keyboard does not cover the items on screen */}
       <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.writeTaskWrapper}
       >
         <TextInput
           style={styles.input}
-          placeholder={"Write a task"}
+          placeholder={"Write A Task..."}
           value={task}
           onChangeText={(text) => setTask(text)}
         />
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#E8EAED",
   },
-  taskWrapper: {
+  tasksWrapper: {
     paddingTop: 80,
     paddingHorizontal: 20,
   },
@@ -91,7 +104,7 @@ const styles = StyleSheet.create({
   input: {
     paddingVertical: 15,
     paddingHorizontal: 15,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFF",
     borderRadius: 60,
     borderColor: "#C0C0C0",
     borderWidth: 1,
@@ -100,7 +113,7 @@ const styles = StyleSheet.create({
   addWrapper: {
     width: 60,
     height: 60,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFF",
     borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
