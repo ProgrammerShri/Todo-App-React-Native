@@ -3,4 +3,4 @@
 <br>
 
 
-<img src="./todoAppDemo.gif" alt="My Project GIF" width="500" height="600">
+<img src="./todoAppDemo.gif" alt="My Project GIF" height="400px" width="250px" >
