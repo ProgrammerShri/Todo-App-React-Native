@@ -1,3 +1,6 @@
 # Todo-App-React-Native
 
-https://github.com/ProgrammerShri/Todo-App-React-Native/blob/main/Todo%20App%20Demo%20Video.mp4
+<br>
+
+
+<img src="./todoAppDemo.gif" alt="My Project GIF" width="500" height="600">
