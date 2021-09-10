@@ -1,6 +1,6 @@
 # Todo-App-React-Native
 
 <br>
+<img src="./todoAppDemoVideo.gif" alt="My Project GIF" height="400px" width="230px" >
 
-
-<img src="./todoAppDemo.gif" alt="My Project GIF" height="400px" width="250px" >
+## You can install this App on your phone just check "Android and iOS installation file" folder.
